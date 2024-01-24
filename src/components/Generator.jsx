@@ -18,11 +18,26 @@ function Header(props) {
 }
 
 export default function Generator(props) {
-  const { area, setArea } = props;
+  const [area, setArea] = useState([]);
+  const [reference, setReference] = useState("health_and_fitness");
+  const [showModal, setShowModal] = useState(false);
 
   function handleSetArea(areaGroup) {
     setArea([...area, areaGroup]);
   }
+
+  function toggleModal() {
+    setShowModal(!showModal);
+  }
+
+  function updateArea(areaGroup) {
+    if (reference !== "health_and_fitness") {
+      setArea([areaGroup]);
+      setShowModal(false);
+      return;
+    }
+  }
+
   return (
     <SectionWrapper
       id={"generate"}
@@ -53,11 +68,35 @@ export default function Generator(props) {
       <Header
         index={"02"}
         title={"References"}
-        description={"Select book to read"}
+        description={"Select books to read"}
       />
-      <div>
-        <button></button>
+      <div className="bg-slate-950  border border-solid border-blue-400 rounded-lg flex flex-col">
+        <button onClick={toggleModal}>Select Reference</button>
+        {showModal && (
+          <div>
+            {reference === "health_and_fitness"
+              ? AREA[reference]
+              : Object.keys(AREA[reference]).map(
+                  (areaGroup, areaGroupIndex) => (
+                    <button
+                      onClick={() => {
+                        updateArea(areaGroup);
+                      }}
+                      key={areaGroupIndex}
+                    >
+                      <p>{areaGroup}</p>
+                    </button>
+                  )
+                )}
+          </div>
+        )}
       </div>
     </SectionWrapper>
   );
 }
+
+//when not health and fitness, return other objects
+
+//general notes: what i did wrong: u copy pasted without understanding if it is the one solving the problem at hand
+//take one step at at time, see if it updates
+//study on foundations

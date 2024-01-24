@@ -1,6 +1,12 @@
 export const AREA = {
-  health_and_fitness: { 1: 1 },
-  sex_and_sexuality: { 1: 1 },
-  polarity: { 1: 1 },
-  dating_and_relationships: { 1: 1 },
+  health_and_fitness: ["book", "etc"],
+  sex_and_sexuality: ["book", "book"],
+  polarity: ["book", "book"],
+  dating_and_relationships: ["book", "book"],
+};
+
+export const SCHEMES = {
+  strength_power: {
+    repRanges: [3, 8],
+  },
 };
