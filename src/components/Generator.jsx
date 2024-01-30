@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import SectionWrapper from "./SectionWrapper";
 import { AREA } from "../utils/content";
+import Button from "./Button";
 
 function Header(props) {
   const { index, title, description } = props;
@@ -18,23 +19,27 @@ function Header(props) {
 }
 
 export default function Generator(props) {
-  const [area, setArea] = useState([]);
-  const [reference, setReference] = useState("health_and_fitness");
-  const [showModal, setShowModal] = useState(false);
+  const { area, setArea, reference, setReference, updateListOfReferences } =
+    props;
 
-  function handleSetArea(areaGroup) {
-    setArea([...area, areaGroup]);
-  }
+  const [showModal, setShowModal] = useState(false);
 
   function toggleModal() {
     setShowModal(!showModal);
   }
 
   function updateArea(areaGroup) {
-    if (reference !== "health_and_fitness") {
-      setArea([areaGroup]);
-      setShowModal(false);
+    if (area.includes(areaGroup)) {
+      setArea(area.filter((val) => val !== areaGroup));
       return;
+    }
+    if (area.length > 1) {
+      return;
+    }
+
+    setArea([...area, areaGroup]);
+    if (area.length === 1) {
+      setShowModal(false);
     }
   }
 
@@ -56,7 +61,8 @@ export default function Generator(props) {
               "bg-slate-950 border  duration-200 px-4 hover:border-blue-600 py-3 rounded-lg "
             }
             onClick={() => {
-              handleSetArea([]);
+              setArea([]);
+              setReference(type);
             }}
             key={typeIndex}
           >
@@ -73,30 +79,30 @@ export default function Generator(props) {
       <div className="bg-slate-950  border border-solid border-blue-400 rounded-lg flex flex-col">
         <button onClick={toggleModal}>Select Reference</button>
         {showModal && (
-          <div>
-            {reference === "health_and_fitness"
+          <div className="flex flex-col px-3 pb-3">
+            {(reference === "health_and_fitness"
               ? AREA[reference]
-              : Object.keys(AREA[reference]).map(
-                  (areaGroup, areaGroupIndex) => (
-                    <button
-                      onClick={() => {
-                        updateArea(areaGroup);
-                      }}
-                      key={areaGroupIndex}
-                    >
-                      <p>{areaGroup}</p>
-                    </button>
-                  )
-                )}
+              : AREA[reference]
+            ).map((areaGroup, areaGroupIndex) => (
+              <button
+                onClick={() => {
+                  updateArea(areaGroup);
+                }}
+                key={areaGroupIndex}
+              >
+                <p>{areaGroup}</p>
+              </button>
+            ))}
           </div>
         )}
       </div>
+      <Button func={updateListOfReferences} text={"Formulate"}></Button>
     </SectionWrapper>
   );
 }
 
-//when not health and fitness, return other objects
-
 //general notes: what i did wrong: u copy pasted without understanding if it is the one solving the problem at hand
 //take one step at at time, see if it updates
 //study on foundations
+
+//ask chatgpt to explain the concept if u find urself staring off into space
