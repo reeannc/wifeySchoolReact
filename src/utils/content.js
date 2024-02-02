@@ -1,15 +1,12 @@
 export const AREA = {
   sex_and_sexuality: ["book", "hnkjdns"],
   health_and_fitness: ["book", "etc", "qwerty"],
-
   polarity: ["book", "polarity"],
   dating_and_relationships: ["book", "book"],
 };
 
-export const SCHEMES = {
-  strength_power: {
-    repRanges: [3, 8],
-  },
+export const BOOK = {
+  strength_power: [3, 8],
 };
 
 export const EXERCISES = {

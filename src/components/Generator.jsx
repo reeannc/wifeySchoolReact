@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import SectionWrapper from "./SectionWrapper";
 import { AREA } from "../utils/content";
 import Button from "./Button";
+import { generateBook } from "../utils/function";
 
 function Header(props) {
-  const { index, title, description } = props;
+  const { index, title, description, are } = props;
   return (
     <div className="flex flex-col gap-4">
       <div className="flex items-center justify-center gap-2">
@@ -19,8 +20,14 @@ function Header(props) {
 }
 
 export default function Generator(props) {
-  const { area, setArea, reference, setReference, updateListOfReferences } =
-    props;
+  const {
+    area,
+    setArea,
+    reference,
+    setReference,
+    updateListOfReferences,
+    updateListContent,
+  } = props;
 
   const [showModal, setShowModal] = useState(false);
 
@@ -36,6 +43,8 @@ export default function Generator(props) {
     if (area.length > 1) {
       return;
     }
+    updateListOfReferences(areaGroup);
+    updateListContent(areaGroup);
 
     setArea([...area, areaGroup]);
     if (area.length === 1) {
@@ -103,6 +112,7 @@ export default function Generator(props) {
 
 //general notes: what i did wrong: u copy pasted without understanding if it is the one solving the problem at hand
 //take one step at at time, see if it updates
-//study on foundations
 
 //ask chatgpt to explain the concept if u find urself staring off into space
+
+//if an areaGroup is clicked (for example: book), show on the empty <div></div> on List.jsx
