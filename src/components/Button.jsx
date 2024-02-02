@@ -5,8 +5,7 @@ export default function Button(props) {
   return (
     <button
       onClick={func}
-      
-      className="px-8 mx-auto py-4 rounded-md border-[2px] bg-slate-950 border-blue-400 border-solid blueShadow duration-200"
+      className="bg-inherit p-0 px-8 mx-auto py-4 rounded-md border-[2px] bg-orange-50 border-blue-400 border-solid blueShadow duration-200"
     >
       <p>{text}</p>
     </button>

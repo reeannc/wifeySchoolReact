@@ -10,6 +10,7 @@ html {
 
 * {
   font-family: "Poppins", sans-serif;
+  background-color: rgb(248 113 113);
 }
 
 span {
@@ -18,10 +19,24 @@ span {
 }
 
 .blueShadow {
-  box-shadow: 3px 3px 0 0 #60a5fa;
+  box-shadow: 3px 3px 0 0 #e860fa;
 }
 
 .blueShadow:hover {
   transform: translate(-3px, -3px);
-  box-shadow: 6px 6px 0 0 #60a5fa;
+  box-shadow: 6px 6px 0 0 #60fa91;
+}
+
+.link {
+  text-decoration: none; /* Remove default underline */
+}
+
+.link:hover {
+  text-decoration: underline; /* Add underline on hover */
+  color: rgb(146, 231, 72);
+}
+
+.chose {
+  font-size: 20px;
+  padding-bottom: 30px;
 }

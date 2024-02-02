@@ -1,11 +1,9 @@
 import React, { useState } from "react";
 import SectionWrapper from "./SectionWrapper";
 import { AREA } from "../utils/content";
-import Button from "./Button";
-import { generateBook } from "../utils/function";
 
 function Header(props) {
-  const { index, title, description, are } = props;
+  const { index, title, description } = props;
   return (
     <div className="flex flex-col gap-4">
       <div className="flex items-center justify-center gap-2">
@@ -67,7 +65,7 @@ export default function Generator(props) {
         {Object.keys(AREA).map((type, typeIndex) => (
           <button
             className={
-              "bg-slate-950 border  duration-200 px-4 hover:border-blue-600 py-3 rounded-lg "
+              " bg-inherit border  duration-200 px-4 hover:border-blue-600 py-3 rounded-lg "
             }
             onClick={() => {
               setArea([]);
@@ -85,8 +83,11 @@ export default function Generator(props) {
         title={"References"}
         description={"Select books to read"}
       />
-      <div className="bg-slate-950  border border-solid border-blue-400 rounded-lg flex flex-col">
-        <button onClick={toggleModal}>Select Reference</button>
+      <div className="  border border-solid border-blue-400 rounded-lg flex flex-col">
+        <button className={"bg-inherit text-blue-50"} onClick={toggleModal}>
+          Select Reference
+        </button>
+
         {showModal && (
           <div className="flex flex-col px-3 pb-3">
             {(reference === "health_and_fitness"
@@ -99,13 +100,12 @@ export default function Generator(props) {
                 }}
                 key={areaGroupIndex}
               >
-                <p>{areaGroup}</p>
+                <p>{areaGroup.replace(/_/g, " ")}</p>
               </button>
             ))}
           </div>
         )}
       </div>
-      <Button func={updateListOfReferences} text={"Formulate"}></Button>
     </SectionWrapper>
   );
 }
@@ -114,5 +114,3 @@ export default function Generator(props) {
 //take one step at at time, see if it updates
 
 //ask chatgpt to explain the concept if u find urself staring off into space
-
-//if an areaGroup is clicked (for example: book), show on the empty <div></div> on List.jsx
